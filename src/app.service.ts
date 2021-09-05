@@ -1,19 +1,26 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
-import { Task } from './Task';
+import { Task } from './task/task.model';
+import { TasksService } from './task/tasks.service';
 
 @Injectable()
 export class AppService {
+  
+  constructor(private tasksService: TasksService) { 
+  }
+
   getHello(): string {
     return 'Hello World!';
   }
   getTasks(): Task[] {
-    //Connection to bdd for getting all tasks
-    let test: Task = {
-      _id: '1',
-      _description: 'Simple CRUD in nest.js, mongodb and angular',
-      _isDone: true,
-      _title: 'Task to do'
-    };
-    return [test, test];
+    let tasks;
+    try {
+      this.tasksService.getTasks(true).then(res => {
+        tasks = res;
+      });
+    } catch (error) {
+      return [];
+    }
+    return tasks;
   }
 }
