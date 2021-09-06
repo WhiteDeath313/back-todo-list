@@ -20,9 +20,7 @@ export class TasksService {
   }
 
   async getTasks(_isDone: boolean) {
-    if (_isDone)
-      _isDone;
-    const tasks = await this.taskModel.find().exec();
+    const tasks = await this.taskModel.find({'_isDone' : _isDone}).exec();
     return tasks.map(task => ({
       _id: task._id,
       _title: task._title,

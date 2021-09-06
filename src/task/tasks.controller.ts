@@ -10,6 +10,7 @@ import {
   } from '@nestjs/common';
   
 import { TasksService } from './tasks.service';
+import { Task } from './task.model';
   
   @Controller('tasks')
   export class TasksController {
@@ -17,14 +18,12 @@ import { TasksService } from './tasks.service';
   
     @Post()
     async addTask(
-      @Body('_title') _title: string,
-      @Body('_description') _description: string,
-      @Body('_isDone') _isDone: boolean,
+      @Body('task') task: Task,
     ) {
       const generatedId = await this.tasksService.insertTask(
-        _title,
-        _description,
-        _isDone,
+        task._title,
+        task._description,
+        task._isDone,
       );
       return { id: generatedId };
     }

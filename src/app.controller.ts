@@ -1,6 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Task } from './task/task.model';
 
 @Controller()
 export class AppController {
@@ -9,9 +8,5 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
-  }
-  @Get('tasks')
-  getTasks(): Task[] {
-    return this.appService.getTasks();
   }
 }
