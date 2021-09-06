@@ -6,7 +6,6 @@ async function bootstrap() {
     bodyParser: true,
   });
   app.enableCors();
-  await app.init();
-  await app.listen(3000);
+  await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
